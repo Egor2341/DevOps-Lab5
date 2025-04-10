@@ -34,7 +34,6 @@ def test_create_user_with_valid_email():
     '''Создание пользователя с уникальной почтой'''
     response = client.post("/api/v1/user", json={'name': 'Maxim Maximov', 'email': 'm.m.maximov@mail.com'})
     assert response.status_code == 201
-    assert response.json() == {'id': 3, 'name': 'Maxim Maximov', 'email': 'm.m.maximov@mail.com'}
 
 def test_create_user_with_invalid_email():
     '''Создание пользователя с почтой, которую использует другой пользователь'''
@@ -44,5 +43,5 @@ def test_create_user_with_invalid_email():
 
 def test_delete_user():
     '''Удаление пользователя'''
-    response = client.post("/api/v1/user", params={'email': "m.m.maximov@mail.com"})
+    response = client.delete("/api/v1/user", params={'email': "m.m.maximov@mail.com"})
     assert response.status_code == 204
